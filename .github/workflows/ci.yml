@@ -1,0 +1,87 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Lint
+        run: ruff check src tools tests experiments
+
+      # Tests run as their own step with machine-readable reports, so a red test
+      # surfaces here and not as a traceback from the metrics collector.
+      - name: Test
+        run: |
+          python -m pytest --junitxml=reports/junit.xml \
+            --cov=raid_signal --cov-report=json:coverage.json \
+            --cov-report=term-missing -q
+
+      - name: Enforce coverage floor
+        run: |
+          python - <<'PY'
+          import json, sys
+          t = json.load(open("coverage.json"))["totals"]
+          line = 100.0 * t["covered_lines"] / t["num_statements"]
+          print(f"line coverage: {line:.1f}%")
+          if line < 95.0:
+              sys.exit(f"line coverage {line:.1f}% below floor 95%")
+          PY
+
+      - name: Re-measure and check numbers
+        run: |
+          python tools/collect_metrics.py --skip-tests
+          python tools/check_numbers.py
+
+      - name: Publish the awkward table to the job summary
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, os
+          m = json.load(open("docs/metrics.json"))["metrics"]
+          rows = [
+              ("warning lead (weeks)", m["lead_weeks"]),
+              ("first signal week", m["first_signal_week"]),
+              ("manual escalation week", m["escalation_week"]),
+              ("3-sigma lead over run rules (weeks)", m["three_sigma_lead_over_run_rules"]),
+              ("opened-count false-alarm weeks", m["opened_false_alarm_weeks"]),
+              ("backlog false-alarm weeks", m["backlog_false_alarm_weeks"]),
+              ("lower-limit clamped (% of weeks)", m["lcl_clamped_pct"]),
+          ]
+          out = os.environ.get("GITHUB_STEP_SUMMARY")
+          lines = ["### raid-signal measured figures", "", "| figure | value |", "|---|---|"]
+          lines += [f"| {k} | {v} |" for k, v in rows]
+          text = "\n".join(lines) + "\n"
+          if out:
+              open(out, "a").write(text)
+          print(text)
+          PY
+
+      - name: Upload experiment artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: experiments-${{ matrix.python-version }}
+          path: |
+            docs/experiments/*.json
+            docs/metrics.json
+            reports/junit.xml

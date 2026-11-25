@@ -115,9 +115,11 @@ def control_chart_svg(result: DetectionResult) -> str:
         f'<text x="{_W - _PAD_R}" y="{_H - 10}" font-size="10" fill="#333" '
         f'text-anchor="end">week {series.weeks[-1]}</text>'
     )
+    axis_mid = _PAD_T + (_H - _PAD_T - _PAD_B) / 2
     parts.append(
-        f'<text x="12" y="{_PAD_T + 6}" font-size="10" fill="#333" '
-        f'transform="rotate(-90 12 {_PAD_T + 6})">blockers opened / week</text>'
+        f'<text x="14" y="{axis_mid:.1f}" font-size="10" fill="#333" '
+        f'text-anchor="middle" transform="rotate(-90 14 {axis_mid:.1f})">'
+        f"blockers opened / week</text>"
     )
     parts.append("</svg>")
     return "".join(parts)

@@ -1,0 +1,64 @@
+[
+  {
+    "command": "raid-signal data/raid_log.csv --escalations data/escalations.csv",
+    "exit_code": 2,
+    "duration_s": 0.378,
+    "output_lines": [
+      "raid-signal: SIGNAL",
+      "  first opened-count signal: week 16",
+      "  warning lead over manual escalation: 4 weeks",
+      "  opened-count chart: center=1.25 UCL=4.60 LCL=0.00 (clamped, blind to improvement)"
+    ]
+  },
+  {
+    "command": "python experiments/exp02_false_alarms.py",
+    "exit_code": 0,
+    "duration_s": 0.323,
+    "output_lines": [
+      "Experiment 2: false alarms on a stable program",
+      "  post-baseline weeks          : 18",
+      "  opened-count false-alarm wks : 3 [19, 20, 21]",
+      "  backlog false-alarm weeks    : 6",
+      "  opened rule counts           : {'rule1': 1, 'rule5': 2}",
+      "  backlog rule counts          : {'rule2': 1, 'rule5': 5}"
+    ]
+  },
+  {
+    "command": "python experiments/exp04_lcl_blindness.py",
+    "exit_code": 0,
+    "duration_s": 0.334,
+    "output_lines": [
+      "Experiment 4: blindness to improvement",
+      "  weeks total              : 30",
+      "  lower limit clamped      : True",
+      "  clamped weeks (pct)      : 30 (100.0%)",
+      "  signals when rate halved : 0 (low-side)"
+    ]
+  },
+  {
+    "command": "python experiments/exp03_run_rules_vs_3sigma.py",
+    "exit_code": 0,
+    "duration_s": 0.321,
+    "output_lines": [
+      "Experiment 3: run rules versus the 3-sigma breach",
+      "  first week per rule (opened) : {'rule1': 16, 'rule5': 21}",
+      "  3-sigma (rule1) first week   : 16",
+      "  earliest run-rule week       : 21",
+      "  run-rule lead over 3-sigma   : -5",
+      "  rule3 firings opened  weeks  : []",
+      "  rule3 firings backlog weeks  : []"
+    ]
+  },
+  {
+    "command": "python tools/check_numbers.py",
+    "exit_code": 0,
+    "duration_s": 0.035,
+    "output_lines": [
+      "warning: README.md: unverified number '21'",
+      "warning: README.md: unverified number '22'",
+      "warning: README.md: unverified number '12'",
+      "warning: README.md: unverified number '1.5'",
+      "check_numbers: OK (15 metrics across 2 docs)"
+    ]
+  }
+]

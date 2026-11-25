@@ -1,0 +1,11 @@
+{
+  "earliest_run_rule_week": 21,
+  "opened_first_week_per_rule": {
+    "rule1": 16,
+    "rule5": 21
+  },
+  "rule1_week": 16,
+  "rule3_firing_weeks_backlog": [],
+  "rule3_firing_weeks_opened": [],
+  "run_rule_lead_over_3sigma": -5
+}

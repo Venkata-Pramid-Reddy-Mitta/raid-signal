@@ -1,0 +1,18 @@
+{
+  "backlog_false_alarm_weeks": 6,
+  "backlog_rule_counts": {
+    "rule2": 1,
+    "rule5": 5
+  },
+  "opened_false_alarm_week_list": [
+    19,
+    20,
+    21
+  ],
+  "opened_false_alarm_weeks": 3,
+  "opened_rule_counts": {
+    "rule1": 1,
+    "rule5": 2
+  },
+  "post_baseline_weeks": 18
+}

@@ -1,0 +1,8 @@
+{
+  "escalation_week": 20,
+  "first_signal_rule": "rule1",
+  "first_signal_week": 16,
+  "lead_weeks": 4,
+  "opened_center": 1.25,
+  "opened_ucl": 4.6041
+}

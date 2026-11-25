@@ -1,0 +1,85 @@
+{
+  "anchors": {
+    "backlog_false_alarm_weeks": [
+      "{} backlog false-alarm weeks",
+      "fires on {} of"
+    ],
+    "blockers_total": [
+      "{} of them blockers",
+      "{} blockers"
+    ],
+    "coverage_line_pct": [
+      "{}% line coverage",
+      "{}% coverage"
+    ],
+    "escalation_week": [
+      "week {}",
+      "in week {}"
+    ],
+    "first_signal_week": [
+      "week {}",
+      "in week {}"
+    ],
+    "items_total": [
+      "{} RAID items"
+    ],
+    "lcl_clamped_pct": [
+      "{}% of weeks",
+      "{}% of every"
+    ],
+    "lead_weeks": [
+      "{} weeks before",
+      "lead of {} weeks",
+      "{} weeks earlier"
+    ],
+    "opened_center": [
+      "centre line at {}",
+      "centre of {}"
+    ],
+    "opened_false_alarm_weeks": [
+      "{} false-signal weeks",
+      "{} weeks of the"
+    ],
+    "opened_ucl": [
+      "upper limit at {}",
+      "UCL of {}"
+    ],
+    "post_baseline_weeks": [
+      "{} post-baseline weeks",
+      "over {} weeks"
+    ],
+    "program_weeks": [
+      "{} program weeks",
+      "{}-week program"
+    ],
+    "tests_total": [
+      "{} tests"
+    ],
+    "three_sigma_lead_over_run_rules": [
+      "{} weeks before the earliest run rule",
+      "led the run rules by {} weeks"
+    ]
+  },
+  "checked_documents": [
+    "README.md",
+    "docs/defense-guide.md"
+  ],
+  "metrics": {
+    "backlog_false_alarm_weeks": 6,
+    "blockers_total": 92,
+    "coverage_line_pct": 100.0,
+    "escalation_week": 20,
+    "first_signal_week": 16,
+    "items_total": 154,
+    "lcl_clamped_pct": 100.0,
+    "lead_weeks": 4,
+    "opened_center": 1.25,
+    "opened_false_alarm_weeks": 3,
+    "opened_ucl": 4.6,
+    "post_baseline_weeks": 18,
+    "program_weeks": 30,
+    "tests_total": 104,
+    "three_sigma_lead_over_run_rules": 5
+  },
+  "note": "every value here is produced by running the suite and the experiments"
+}

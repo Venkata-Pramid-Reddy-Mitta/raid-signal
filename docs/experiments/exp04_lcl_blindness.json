@@ -1,0 +1,8 @@
+{
+  "clamped_pct": 100.0,
+  "clamped_weeks": 30,
+  "halved_lower_limit": 0.0,
+  "halved_post_baseline_low_signals": 0,
+  "lower_clamped": true,
+  "total_weeks": 30
+}

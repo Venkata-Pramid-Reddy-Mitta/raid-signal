@@ -13,8 +13,6 @@ week that closes the run, which is the first week a human could have acted on it
 
 from __future__ import annotations
 
-import numpy as np
-
 from .config import Policy
 from .model import ControlLimits, Signal, WeeklySeries
 
@@ -115,12 +113,3 @@ def first_signal_week(signals: list[Signal], on_or_after: int = 1) -> int | None
     """The earliest week any signal fired at or after a given week, or None."""
     weeks = [s.week for s in signals if s.week >= on_or_after]
     return min(weeks) if weeks else None
-
-
-def _dedupe_consecutive(values: tuple[float, ...]) -> np.ndarray:
-    """Helper kept for experiments that need the distinct-level sequence."""
-    arr = np.asarray(values, dtype=float)
-    if arr.size == 0:
-        return arr
-    keep = np.concatenate(([True], np.diff(arr) != 0))
-    return arr[keep]

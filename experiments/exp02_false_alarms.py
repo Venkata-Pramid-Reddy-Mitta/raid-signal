@@ -50,7 +50,9 @@ def main() -> None:
     p = run()
     print("Experiment 2: false alarms on a stable program")
     print(f"  post-baseline weeks          : {p['post_baseline_weeks']}")
-    print(f"  opened-count false-alarm wks : {p['opened_false_alarm_weeks']} {p['opened_false_alarm_week_list']}")
+    weeks = p["opened_false_alarm_weeks"]
+    week_list = p["opened_false_alarm_week_list"]
+    print(f"  opened-count false-alarm wks : {weeks} {week_list}")
     print(f"  backlog false-alarm weeks    : {p['backlog_false_alarm_weeks']}")
     print(f"  opened rule counts           : {p['opened_rule_counts']}")
     print(f"  backlog rule counts          : {p['backlog_rule_counts']}")

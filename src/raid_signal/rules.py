@@ -59,20 +59,21 @@ def _rule2(series: WeeklySeries, limits: ControlLimits) -> list[Signal]:
 
 
 def _rule3(series: WeeklySeries, limits: ControlLimits) -> list[Signal]:
-    """Six points in a row all increasing or all decreasing."""
+    """Six points in a row all increasing or all decreasing.
+
+    The comparison is strict: a week equal to the one before it is not movement,
+    so it breaks both the increasing and the decreasing run. A non-strict
+    comparison (treating a flat week as both an increase and a decrease) reports
+    a trend across a plateau, which is the opposite of what this rule is for; see
+    the war story in the README and test_rule3_regression.py.
+    """
     out: list[Signal] = []
     values = series.values
     inc = 0
     dec = 0
     for i in range(1, len(values)):
-        if values[i] >= values[i - 1]:
-            inc += 1
-        else:
-            inc = 0
-        if values[i] <= values[i - 1]:
-            dec += 1
-        else:
-            dec = 0
+        inc = inc + 1 if values[i] > values[i - 1] else 0
+        dec = dec + 1 if values[i] < values[i - 1] else 0
         if inc + 1 == RULE3_RUN:
             out.append(Signal("rule3", series.weeks[i], "6 points trending up"))
         if dec + 1 == RULE3_RUN:

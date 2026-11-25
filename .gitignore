@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+reports/
+.venv/
+venv/
+# Rendered report HTML is regenerable from committed data; keep it out of git.
+docs/report.html
+# Playwright browser downloads
+node_modules/

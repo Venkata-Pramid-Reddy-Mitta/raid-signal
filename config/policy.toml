@@ -1,0 +1,48 @@
+# raid-signal control policy.
+#
+# Every value a reviewer might want to argue with lives here, not in the code,
+# so the argument is about the policy and not about a buried constant. Each
+# decision carries the reason it is set the way it is.
+
+[baseline]
+# The control limits are frozen on a declared stable window and then applied to
+# every later week. They are NOT recomputed each week on purpose: recomputing
+# would let a slow upward shift raise its own ceiling and hide itself (ADR-005).
+# Weeks are 1-indexed and inclusive.
+start_week = 1
+end_week = 12
+
+[limits]
+# Sigma multiplier for the Shewhart limits. 3.0 is the Shewhart convention: it
+# keeps the false-alarm rate on a stable Poisson/normal process low enough that
+# a single point outside the limit is worth a human looking. Lower it and the
+# false-signal weeks climb (see experiments/exp02).
+sigma = 3.0
+
+# For a Poisson count chart the lower limit c_bar - 3*sqrt(c_bar) is frequently
+# negative and is clamped to zero. When true, raid-signal records every week the
+# clamp was active, because a clamped lower limit means an improvement can never
+# register as a signal (ADR-004). This is reported, never silently swallowed.
+clamp_lower_to_zero = true
+
+[rules]
+# Which Nelson run rules are active. A single point beyond 3 sigma (rule 1) is
+# the slowest of the useful signals; the run rules below catch a drift earlier,
+# at the cost of more false alarms. Each rule you enable is a lead-time-for-
+# false-alarms trade priced in experiments/exp02 and experiments/exp03.
+rule1_point_beyond_3sigma = true     # 1 point outside 3 sigma
+rule2_nine_one_side = true           # 9 points in a row on one side of centre
+rule3_six_trending = true            # 6 points in a row all increasing or all decreasing
+rule5_two_of_three_beyond_2sigma = true  # 2 of 3 points beyond 2 sigma, same side
+
+[scope]
+# When true the opened-count chart is built from blocker items only, because a
+# blocker spike is the escalation the governance process actually cares about.
+# The backlog chart always uses all open items.
+blockers_only_for_opened_chart = true
+
+[escalation]
+# A signal counts as "early warning" only if it fires at or before the manual
+# escalation week recorded in the escalation log. A signal that fires more than
+# this many weeks after an escalation is late and is not credited as a warning.
+late_grace_weeks = 0

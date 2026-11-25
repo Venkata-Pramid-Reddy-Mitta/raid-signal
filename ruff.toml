@@ -1,0 +1,12 @@
+# Line length chosen to a width this repository actually holds to, not the
+# default 88, because wrapping the SPC formulas tighter hurt readability.
+line-length = 100
+target-version = "py311"
+
+[lint]
+select = ["E", "F", "I", "W", "B", "UP", "C4", "SIM"]
+# B905: zip strict= is noise on fixed-length numeric pairs here.
+ignore = ["B905"]
+
+[lint.isort]
+known-first-party = ["raid_signal"]

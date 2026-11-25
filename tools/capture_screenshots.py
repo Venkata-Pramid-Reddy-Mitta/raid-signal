@@ -56,12 +56,18 @@ def main() -> int:
     try:
         from playwright.sync_api import sync_playwright
     except ImportError:
-        print("capture_screenshots: playwright not installed (pip install .[evidence])", file=sys.stderr)
+        print(
+            "capture_screenshots: playwright not installed (pip install .[evidence])",
+            file=sys.stderr,
+        )
         return 1
 
     exe = _executable()
     if exe is None:
-        print("capture_screenshots: no chrome/chromium binary found; cannot screenshot", file=sys.stderr)
+        print(
+            "capture_screenshots: no chrome/chromium binary found; cannot screenshot",
+            file=sys.stderr,
+        )
         return 1
 
     _build_report_if_missing()

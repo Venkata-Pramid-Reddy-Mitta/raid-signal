@@ -74,7 +74,7 @@ def build_svg() -> str:
             f'stroke="#555" stroke-width="1.3" marker-end="url(#arrow)"/>'
         )
 
-    for nid, col, row, label in NODES:
+    for _nid, col, row, label in NODES:
         x = MARGIN + col * COL_W
         y = MARGIN + row * ROW_H
         parts.append(

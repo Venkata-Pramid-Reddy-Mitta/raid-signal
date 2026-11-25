@@ -110,7 +110,8 @@ def main() -> int:
         for f in failures:
             print(f"  {f}")
         return 1
-    print(f"check_numbers: OK ({len(metrics)} metrics across {len(payload['checked_documents'])} docs)")
+    n_docs = len(payload["checked_documents"])
+    print(f"check_numbers: OK ({len(metrics)} metrics across {n_docs} docs)")
     return 0
 
 

@@ -55,8 +55,7 @@ ANCHORS: dict[str, list[str]] = {
 }
 
 CHECKED_DOCUMENTS = [
-    "README.md",
-    "docs/defense-guide.md",
+    "README.md"
 ]
 
 

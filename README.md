@@ -2,6 +2,7 @@
 
 **Puts statistical process control over a RAID log so a blocker spike trips a gate before a human escalates. On a seeded 30-week program it signalled in week 16, four weeks before the team escalated in week 20.**
 
+[![ci](https://github.com/Venkata-Pramid-Reddy-Mitta/raid-signal/actions/workflows/ci.yml/badge.svg)](https://github.com/Venkata-Pramid-Reddy-Mitta/raid-signal/actions/workflows/ci.yml)
 ![tests](https://img.shields.io/badge/tests-104%20passing-brightgreen)
 ![coverage](https://img.shields.io/badge/line%20coverage-100%25-brightgreen)
 ![license](https://img.shields.io/badge/license-MIT-blue)

@@ -14,7 +14,7 @@ on a stable process, so each one bought earlier warning at the cost of more fals
 
 ## Decision
 
-Implement rules 1 (one point beyond 3-sigma), 2 (nine points one side of centre), 3 (six
+Implement rules 1 (one point beyond 3-sigma), 2 (nine points one side of center), 3 (six
 points trending), and 5 (two of three beyond 2-sigma), each switchable in the policy file.
 Do not treat the run rules as free: measure their cost directly.
 

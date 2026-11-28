@@ -6,8 +6,8 @@ Accepted.
 
 ## Context
 
-Two facts collide. First, for a low Poisson count the lower control limit `centre -
-3*sqrt(centre)` is negative, and a count cannot be negative. Second, the backlog level chart
+Two facts collide. First, for a low Poisson count the lower control limit `center -
+3*sqrt(center)` is negative, and a count cannot be negative. Second, the backlog level chart
 fires far more often than the opened-count chart on a stable programme, because a level
 carries last week's value forward and so violates the independence an individuals chart
 assumes.

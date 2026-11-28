@@ -19,7 +19,7 @@ it. Later weeks are judged against those frozen limits and never fold back into 
 ## Why
 
 A trailing window that re-learns the limits every week absorbs a slow upward drift into its
-own baseline: as the counts creep up, the centre line and the upper limit creep up with
+own baseline: as the counts creep up, the center line and the upper limit creep up with
 them, and the drift raises its own ceiling and hides. The one failure mode the tool exists to
 catch is exactly the one an adaptive baseline is blind to. Freezing the baseline is what lets
 a sustained shift read as a sustained shift.
